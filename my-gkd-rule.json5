@@ -1,0 +1,367 @@
+{
+  id: "global_ad_alliance_ultimate_final",
+  name: "全球广告联盟通杀·最终稳定版",
+  version: 20260329,
+  priority: 100,
+  categories: [
+    {
+      key: 0,
+      name: "开屏广告",
+      enable: true,
+      fastQuery: true,
+      matchTime: 3000,
+      actionMaximum: 1,
+      actionCd: 2000,
+      resetMatch: "app"
+    },
+    {
+      key: 1,
+      name: "弹窗广告",
+      enable: true,
+      fastQuery: true,
+      matchTime: 2500,
+      actionMaximum: 1,
+      actionCd: 2500,
+      resetMatch: "activity"
+    }
+  ],
+  globalGroups: [
+    // ==============================================
+    // 国内全广告联盟（头部+长尾全覆盖）
+    // ==============================================
+    {
+      key: 1000,
+      name: "穿山甲Pangle",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=^com\\.bytedance\\.ad\\..*skip|close$", "clickable=true", "visibleToUser=true"], action: "click", delay: 500 },
+        { matches: ["text~=^跳过|\\d+秒|跳过广告$", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1001,
+      name: "腾讯优量汇GDT",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=^com\\.qq\\.e\\..*skip|close$", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1002,
+      name: "百度百青藤",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=^com\\.baidu\\.ad\\..*skip|close$", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1003,
+      name: "快手广告联盟",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=^com\\.kwai\\.ad\\..*skip$", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1004,
+      name: "手机厂商广告",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.miui\\.ad|com\\.huawei\\.ad|com\\.oppo\\.ad|com\\.vivo\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1005,
+      name: "360广告联盟",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.qihoo360\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1006,
+      name: "网易易效",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.netease\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1007,
+      name: "阿里妈妈广告",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.taobao\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1008,
+      name: "新浪广告",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.sina\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1009,
+      name: "搜狐广告",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.sohu\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1010,
+      name: "多盟Domob",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.domob\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 1011,
+      name: "有米Youmi",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.youmi\\.ad.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+
+    // ==============================================
+    // 海外全广告联盟（全覆盖）
+    // ==============================================
+    {
+      key: 2000,
+      name: "Google AdMob / Ads",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.google\\.android\\.gms\\.ads.*skip|close", "clickable=true"], action: "click", delay: 500 },
+        { matches: ["text~=Skip|Close|\\d+s|Skip Ad", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2001,
+      name: "Meta Audience Network",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.facebook\\.ads.*skip|close", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2002,
+      name: "AppLovin",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.applovin\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2003,
+      name: "Unity Ads",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.unity3d\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2004,
+      name: "AdColony",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.adcolony\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2005,
+      name: "Vungle",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.vungle\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2006,
+      name: "Chartboost",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.chartboost\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2007,
+      name: "InMobi",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.inmobi\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2008,
+      name: "IronSource",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.ironsource\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2009,
+      name: "Mintegral",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.mintegral\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2010,
+      name: "Tapjoy",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.tapjoy\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+    {
+      key: 2011,
+      name: "Amazon Ads",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["id~=com\\.amazon\\.ads.*skip", "clickable=true"], action: "click", delay: 500 }
+      ]
+    },
+
+    // ==============================================
+    // 全局兜底规则
+    // ==============================================
+    {
+      key: 9000,
+      name: "全局跳过/关闭兜底",
+      category: 0,
+      fastQuery: true,
+      rules: [
+        { matches: ["text=跳过", "clickable=true"], action: "click", delay: 600 },
+        { matches: ["text=Skip", "clickable=true"], action: "click", delay: 600 },
+        { matches: ["text=×", "clickable=true", "width<60", "height<60"], action: "click" },
+        { matches: ["text~=关闭广告|Close Ad", "clickable=true"], action: "click" }
+      ]
+    }
+  ],
+
+  // ==============================================
+  // 特殊APP专属规则
+  // ==============================================
+  apps: [
+    {
+      id: "com.tencent.mm",
+      name: "微信",
+      groups: [
+        { key: 2000, name: "开屏广告", category: 0, activityIds: ["com.tencent.mm.ui.LauncherUI"],
+          rules: [{ matches: ["id=com.tencent.mm:id/skip_ad_button", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.ss.android.ugc.aweme",
+      name: "抖音",
+      groups: [
+        { key: 2001, name: "开屏广告", category: 0, activityIds: ["com.ss.android.ugc.aweme.splash.SplashActivity"],
+          rules: [{ matches: ["id~=skip_text|count_down", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.taobao.taobao",
+      name: "淘宝",
+      groups: [
+        { key: 2002, name: "开屏广告", category: 0, activityIds: ["com.taobao.tao.welcome.Welcome"],
+          rules: [{ matches: ["id=com.taobao.taobao:id/skip", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.eg.android.AlipayGphone",
+      name: "支付宝",
+      groups: [
+        { key: 2003, name: "开屏广告", category: 0, activityIds: ["com.alipay.mobile.quinox.LauncherActivity"],
+          rules: [{ matches: ["text=跳过", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.jingdong.app.mall",
+      name: "京东",
+      groups: [
+        { key: 2004, name: "开屏广告", category: 0,
+          rules: [{ matches: ["id~=skip|splash_skip", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.xunmeng.pinduoduo",
+      name: "拼多多",
+      groups: [
+        { key: 2005, name: "开屏广告", category: 0,
+          rules: [{ matches: ["text=跳过", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.netease.cloudmusic",
+      name: "网易云音乐",
+      groups: [
+        { key: 2006, name: "开屏广告", category: 0,
+          rules: [{ matches: ["id=com.netease.cloudmusic:id/skip_btn", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.sf.activity",
+      name: "顺丰速运",
+      groups: [
+        { key: 2007, name: "开屏广告", category: 0, activityIds: ["com.sf.activity.SplashActivity"],
+          rules: [{ matches: ["text=跳过", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.google.android.youtube",
+      name: "YouTube",
+      groups: [
+        { key: 3000, name: "视频广告", category: 0,
+          rules: [{ matches: ["text~=Skip Ad|Skip", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    },
+    {
+      id: "com.twitter.android",
+      name: "Twitter/X",
+      groups: [
+        { key: 3001, name: "开屏广告", category: 0,
+          rules: [{ matches: ["text=Skip Ad", "clickable=true"], action: "click", delay: 400 }]
+        }
+      ]
+    }
+  ]
+}
