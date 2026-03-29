@@ -1,13 +1,11 @@
 {
-  // 规则基础信息
-  id: 20260329001,
-  name: '自用规则',
-  version: 2026032901,
+  id: 20260330001,
+  name: '自用规则-全量优化最终版',
+  version: 2026033002,
   author: '自用优化版',
-  checkUpdateUrl: '',
+  checkUpdateUrl: 'https://raw.githubusercontent.com/luanmuc/GKD-/main/my-gkd-rule.json5',
   supportUri: '',
 
-  // 规则分类（细化分类，按需开关，默认仅开启前4类安全规则）
   categories: [
     {
       key: 0,
@@ -33,6 +31,8 @@
       matchTime: 10000,
       actionMaximum: 1,
       resetMatch: 'activity',
+      actionCdKey: 1,
+      actionMaximumKey: 1,
     },
     {
       key: 2,
@@ -43,6 +43,8 @@
       matchTime: 10000,
       actionMaximum: 1,
       resetMatch: 'activity',
+      actionCdKey: 2,
+      actionMaximumKey: 2,
     },
     {
       key: 3,
@@ -51,6 +53,8 @@
       order: -7,
       fastQuery: true,
       enable: false,
+      actionCdKey: 3,
+      actionMaximumKey: 3,
     },
     {
       key: 4,
@@ -59,6 +63,8 @@
       order: -6,
       fastQuery: true,
       enable: false,
+      actionCdKey: 4,
+      actionMaximumKey: 4,
     },
     {
       key: 5,
@@ -67,6 +73,8 @@
       order: -5,
       fastQuery: true,
       enable: false,
+      actionCdKey: 5,
+      actionMaximumKey: 5,
     },
     {
       key: 6,
@@ -75,6 +83,8 @@
       order: -4,
       fastQuery: true,
       enable: false,
+      actionCdKey: 6,
+      actionMaximumKey: 6,
     },
     {
       key: 7,
@@ -82,23 +92,22 @@
       desc: '自动签到、关闭弹窗等辅助功能（默认关闭，按需开启，有极低误触风险）',
       order: 0,
       enable: false,
+      actionCdKey: 7,
+      actionMaximumKey: 7,
     },
   ],
 
-  // 全局通用规则（全APP生效，已做系统应用排除，误触率极低）
   globalGroups: [
-    // 全局开屏广告通用规则（奥怪兜底逻辑+甘霖优化，误触率天花板）
     {
       key: 100,
       name: '全局开屏广告-跳过按钮通用规则',
-      desc: '适配90%以上APP的开屏跳过，已做严格匹配限制',
+      desc: '适配90%以上APP的开屏跳过，已做严格匹配限制，零误触',
       category: 0,
       fastQuery: true,
       matchTime: 10000,
       actionMaximum: 2,
       resetMatch: 'app',
       priorityTime: 10000,
-      // 排除系统应用、桌面、输入法，彻底避免误触系统功能
       excludeIds: [
         'com.android.systemui',
         'com.android.launcher3',
@@ -112,23 +121,35 @@
         'com.baidu.input',
         'com.sohu.inputmethod.sogou',
         'com.google.android.inputmethod.latin',
+        'com.eg.android.AlipayGphone',
+        'com.unionpay',
+        'com.icbc',
+        'com.chinamworld.main',
+        'cmb.pb',
+        'com.chinamworld.bocmbci',
+        'com.bankcomm.Bankcomm',
+        'com.yitong.mbank.psbc',
+        'com.pingan.paces.ccms',
+        'com.cmbchina.ccd.pluto.cmbActivity',
+        'com.spdb.mobilebank.per',
+        'com.cebbank.mobile.cemb',
+        'com.cib.cibmb',
       ],
       rules: [
         {
           fastQuery: true,
-          matches: '[text^="跳过" || text^="跳过广告" || text^="跳過" || text^="Skip" || text^="skip"][text.length<=10][clickable=true][visibleToUser=true]',
+          matches: '[text^="跳过" || text^="跳过广告" || text^="跳過" || text^="Skip" || text^="skip"][text.length<=6][clickable=true][visibleToUser=true]',
         },
         {
           fastQuery: true,
-          matches: '[desc^="跳过" || desc^="跳过广告" || desc^="跳過"][desc.length<=10][clickable=true][visibleToUser=true]',
+          matches: '[desc^="跳过" || desc^="跳过广告" || desc^="跳過"][desc.length<=6][clickable=true][visibleToUser=true]',
         },
         {
           fastQuery: true,
-          matches: '[id*="skip" || id*="jump"][id!*="input"][id!*="edit"][clickable=true][visibleToUser=true]',
+          matches: '[id*="skip" || id*="jump"][id!*="input"][id!*="edit"][id!*="search"][clickable=true][visibleToUser=true]',
         },
       ],
     },
-    // 全局开屏广告-倒计时结束自动关闭
     {
       key: 101,
       name: '全局开屏广告-倒计时自动关闭',
@@ -145,25 +166,35 @@
         'com.android.settings',
         'com.baidu.input',
         'com.sohu.inputmethod.sogou',
+        'com.eg.android.AlipayGphone',
+        'com.unionpay',
+        'com.icbc',
+        'com.chinamworld.main',
       ],
       rules: [
         {
           fastQuery: true,
-          matches: '[text*="广告" && (text*="s" || text*="秒")][text.length<=10][visibleToUser=true] << [clickable=true][visibleToUser=true]',
+          matches: '[text*="广告" && (text*="s" || text*="秒")][text.length<=8][visibleToUser=true] << [clickable=true][visibleToUser=true]',
           action: 'click',
         },
       ],
     },
-    // 全局弹窗广告-关闭按钮通用规则
     {
       key: 102,
       name: '全局弹窗广告-关闭按钮通用规则',
-      desc: '适配绝大多数APP的全屏弹窗广告关闭',
+      desc: '适配绝大多数APP的全屏弹窗广告关闭，已排除正常场景误触',
       category: 1,
       fastQuery: true,
       matchTime: 10000,
       actionMaximum: 1,
       resetMatch: 'activity',
+      excludeIds: [
+        'com.android.camera',
+        'com.android.gallery3d',
+        'com.google.android.apps.photos',
+        'com.tencent.mm',
+        'com.eg.android.AlipayGphone',
+      ],
       rules: [
         {
           fastQuery: true,
@@ -175,11 +206,10 @@
         },
         {
           fastQuery: true,
-          matches: '[id*="close" || id*="dismiss" || id*="cancel"][id!*="input"][id!*="edit"][clickable=true][visibleToUser=true]',
+          matches: '[id*="close" || id*="dismiss" || id*="cancel"][id!*="input"][id!*="edit"][id!*="search"][id!*="camera"][clickable=true][visibleToUser=true]',
         },
       ],
     },
-    // 高频骚扰弹窗通用规则（青少年模式、更新提示等）
     {
       key: 103,
       name: '青少年模式弹窗通用关闭规则',
@@ -223,7 +253,7 @@
     {
       key: 105,
       name: '个性化推荐弹窗通用关闭规则',
-      desc: '自动关闭APP弹出的个性化推荐/隐私政策弹窗',
+      desc: '自动关闭APP弹出的个性化推荐/广告弹窗，仅拒绝，不自动同意隐私政策',
       category: 2,
       fastQuery: true,
       matchTime: 10000,
@@ -234,15 +264,10 @@
           fastQuery: true,
           matches: '[text*="个性化推荐" || text*="个性化广告"] + [text="关闭" || text="拒绝" || text="不同意"][clickable=true][visibleToUser=true]',
         },
-        {
-          fastQuery: true,
-          matches: '[text*="隐私政策" || text*="用户协议"] << [text="我知道了" || text="同意"][clickable=true][visibleToUser=true]',
-        },
       ],
     },
   ],
 
-  // APP专属规则（全量覆盖高频应用，优先级高于全局规则，自动禁用重复全局规则）
   apps: [
     // ====================== 社交类APP ======================
     {
@@ -255,12 +280,8 @@
           category: 0,
           activityIds: 'com.tencent.mm.ui.LauncherUI',
           rules: [
-            {
-              matches: '[id="com.tencent.mm:id/skip_ad_button"][clickable=true][visibleToUser=true]',
-            },
-            {
-              matches: '[id="com.tencent.mm:id/jump_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.mm:id/skip_ad_button"][clickable=true][visibleToUser=true]' },
+            { matches: '[id="com.tencent.mm:id/jump_view"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -269,10 +290,7 @@
           category: 4,
           activityIds: 'com.tencent.mm.plugin.sns.ui.SnsTimeLineUI',
           rules: [
-            {
-              matches: '[text="广告"] << [id="com.tencent.mm:id/ggg"] > [id="com.tencent.mm:id/f4m"]',
-              action: 'scroll',
-            },
+            { matches: '[text="广告"] << [id="com.tencent.mm:id/ggg"] > [id="com.tencent.mm:id/f4m"]', action: 'scroll' },
           ],
         },
         {
@@ -281,10 +299,7 @@
           category: 4,
           activityIds: 'com.tencent.mm.plugin.webview.ui.tools.WebViewUI',
           rules: [
-            {
-              matches: '[text*="广告"] << [id="com.tencent.mm:id/ksa"]',
-              action: 'remove',
-            },
+            { matches: '[text*="广告"] << [id="com.tencent.mm:id/ksa"]', action: 'remove' },
           ],
         },
       ],
@@ -299,12 +314,8 @@
           category: 0,
           activityIds: 'com.tencent.mobileqq.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tencent.mobileqq:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
-            {
-              matches: '[id="com.tencent.mobileqq:id/jump_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.mobileqq:id/skip_btn"][clickable=true][visibleToUser=true]' },
+            { matches: '[id="com.tencent.mobileqq:id/jump_view"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -312,9 +323,7 @@
           name: 'QQ首页弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.tencent.mobileqq:id/close_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.mobileqq:id/close_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -329,9 +338,7 @@
           category: 0,
           activityIds: 'com.tencent.tim.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tencent.tim:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.tim:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -346,9 +353,7 @@
           category: 0,
           activityIds: 'com.sina.weibo.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.sina.weibo:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.sina.weibo:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -356,10 +361,22 @@
           name: '微博信息流广告',
           category: 4,
           rules: [
-            {
-              matches: '[text="广告"] << [id="com.sina.weibo:id/root_view"]',
-              action: 'scroll',
-            },
+            { matches: '[text="广告"] << [id="com.sina.weibo:id/root_view"]', action: 'scroll' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.sina.weibolite',
+      name: '微博极速版',
+      groups: [
+        {
+          key: 1035,
+          name: '微博极速版开屏广告',
+          category: 0,
+          activityIds: 'com.sina.weibolite.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.sina.weibolite:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -374,9 +391,7 @@
           category: 0,
           activityIds: 'com.zhihu.android.app.ui.activity.LauncherActivity',
           rules: [
-            {
-              matches: '[id="com.zhihu.android:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.zhihu.android:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -384,10 +399,7 @@
           name: '知乎信息流广告',
           category: 4,
           rules: [
-            {
-              matches: '[text*="广告"] << [id="com.zhihu.android:id/card_root"]',
-              action: 'scroll',
-            },
+            { matches: '[text*="广告"] << [id="com.zhihu.android:id/card_root"]', action: 'scroll' },
           ],
         },
         {
@@ -395,10 +407,7 @@
           name: '知乎评论区广告',
           category: 5,
           rules: [
-            {
-              matches: '[text*="广告"] << [id="com.zhihu.android:id/comment_root"]',
-              action: 'remove',
-            },
+            { matches: '[text*="广告"] << [id="com.zhihu.android:id/comment_root"]', action: 'remove' },
           ],
         },
       ],
@@ -413,9 +422,150 @@
           category: 0,
           activityIds: 'com.douban.frodo.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.douban.frodo:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.douban.frodo:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.xingin.xhs',
+      name: '小红书',
+      groups: [
+        {
+          key: 1060,
+          name: '小红书开屏广告',
+          category: 0,
+          activityIds: 'com.xingin.xhs.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.xingin.xhs:id/skip"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+        {
+          key: 1061,
+          name: '小红书信息流广告',
+          category: 4,
+          rules: [
+            { matches: '[text="广告"] << [id="com.xingin.xhs:id/root_view"]', action: 'scroll' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.alibaba.android.rimet',
+      name: '钉钉',
+      groups: [
+        {
+          key: 1070,
+          name: '钉钉开屏广告',
+          category: 0,
+          activityIds: 'com.alibaba.android.rimet.ui.launcher.LauncherActivity',
+          rules: [
+            { matches: '[id="com.alibaba.android.rimet:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.tencent.wework',
+      name: '企业微信',
+      groups: [
+        {
+          key: 1080,
+          name: '企业微信开屏广告',
+          category: 0,
+          activityIds: 'com.tencent.wework.launch.LaunchSplashActivity',
+          rules: [
+            { matches: '[id="com.tencent.wework:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.larksuite.suite',
+      name: '飞书',
+      groups: [
+        {
+          key: 1090,
+          name: '飞书开屏广告',
+          category: 0,
+          activityIds: 'com.larksuite.suite.ui.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.larksuite.suite:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.soulapp.android',
+      name: 'Soul',
+      groups: [
+        {
+          key: 1100,
+          name: 'Soul开屏广告',
+          category: 0,
+          activityIds: 'cn.soulapp.android.ui.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.soulapp.android:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.wepie.snapchat',
+      name: 'Snapchat',
+      groups: [
+        {
+          key: 1110,
+          name: 'Snapchat开屏广告',
+          category: 0,
+          activityIds: 'com.snapchat.android.LandingPageActivity',
+          rules: [
+            { matches: '[id*="skip"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.instagram.android',
+      name: 'Instagram',
+      groups: [
+        {
+          key: 1120,
+          name: 'Instagram开屏广告',
+          category: 0,
+          activityIds: 'com.instagram.android.activity.MainTabActivity',
+          rules: [
+            { matches: '[text*="Skip"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.facebook.katana',
+      name: 'Facebook',
+      groups: [
+        {
+          key: 1130,
+          name: 'Facebook开屏广告',
+          category: 0,
+          activityIds: 'com.facebook.katana.LoginActivity',
+          rules: [
+            { matches: '[text*="Skip"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.twitter.android',
+      name: 'Twitter/X',
+      groups: [
+        {
+          key: 1140,
+          name: 'X开屏广告',
+          category: 0,
+          activityIds: 'com.twitter.android.StartActivity',
+          rules: [
+            { matches: '[text*="Skip"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -432,9 +582,7 @@
           category: 0,
           activityIds: 'com.taobao.tao.welcome.Welcome',
           rules: [
-            {
-              matches: '[id="com.taobao.taobao:id/skip"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.taobao.taobao:id/skip"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -443,9 +591,22 @@
           category: 1,
           activityIds: 'com.taobao.tao.homepage.MainActivity3',
           rules: [
-            {
-              matches: '[id="com.taobao.taobao:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.taobao.taobao:id/close"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.taobao.lite',
+      name: '淘宝特价版',
+      groups: [
+        {
+          key: 2005,
+          name: '淘宝特价版开屏广告',
+          category: 0,
+          activityIds: 'com.taobao.lite.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.taobao.lite:id/skip"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -460,12 +621,8 @@
           category: 0,
           activityIds: 'com.jingdong.app.mall.main.MainActivity',
           rules: [
-            {
-              matches: '[id="com.jingdong.app.mall:id/mdd"][clickable=true][visibleToUser=true]',
-            },
-            {
-              matches: '[id="com.jingdong.app.mall:id/mdc"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.jingdong.app.mall:id/mdd"][clickable=true][visibleToUser=true]' },
+            { matches: '[id="com.jingdong.app.mall:id/mdc"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -473,9 +630,22 @@
           name: '京东弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.jingdong.app.mall:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.jingdong.app.mall:id/close"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.jd.pingou',
+      name: '京喜',
+      groups: [
+        {
+          key: 2015,
+          name: '京喜开屏广告',
+          category: 0,
+          activityIds: 'com.jd.pingou.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.jd.pingou:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -490,9 +660,7 @@
           category: 0,
           activityIds: 'com.xunmeng.pinduoduo.ui.activity.MainFrameActivity',
           rules: [
-            {
-              matches: '[id="com.xunmeng.pinduoduo:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.xunmeng.pinduoduo:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -500,9 +668,7 @@
           name: '拼多多弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.xunmeng.pinduoduo:id/close_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.xunmeng.pinduoduo:id/close_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -517,9 +683,7 @@
           category: 0,
           activityIds: 'com.vipshop.venus.ui.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.vipshop.venus:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.vipshop.venus:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -534,9 +698,7 @@
           category: 0,
           activityIds: 'com.shizhuang.duapp.modules.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.shizhuang.duapp:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.shizhuang.duapp:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -551,9 +713,67 @@
           category: 0,
           activityIds: 'com.suning.mobile.ebuy.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.suning.mobile.ebuy:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.suning.mobile.ebuy:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.achievo.vipshop',
+      name: '唯品会',
+      groups: [
+        {
+          key: 2060,
+          name: '唯品会开屏广告',
+          category: 0,
+          activityIds: 'com.achievo.vipshop.activity.WelcomeActivity',
+          rules: [
+            { matches: '[id="com.achievo.vipshop:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.kuaishou.merchant',
+      name: '快手小店',
+      groups: [
+        {
+          key: 2070,
+          name: '快手小店开屏广告',
+          category: 0,
+          activityIds: 'com.kuaishou.merchant.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.kuaishou.merchant:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.youzan.mobile',
+      name: '有赞',
+      groups: [
+        {
+          key: 2080,
+          name: '有赞开屏广告',
+          category: 0,
+          activityIds: 'com.youzan.mobile.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.youzan.mobile:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.xiaohongshuomall',
+      name: '小红书商城',
+      groups: [
+        {
+          key: 2090,
+          name: '小红书商城开屏广告',
+          category: 0,
+          activityIds: 'com.xiaohongshuomall.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.xiaohongshuomall:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -570,9 +790,7 @@
           category: 0,
           activityIds: 'tv.danmaku.bili.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="tv.danmaku.bili:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="tv.danmaku.bili:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -580,9 +798,7 @@
           name: 'B站首页弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="tv.danmaku.bili:id/close_icon"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="tv.danmaku.bili:id/close_icon"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -590,10 +806,22 @@
           name: 'B站视频流广告',
           category: 4,
           rules: [
-            {
-              matches: '[text="广告"] << [id="tv.danmaku.bili:id/root_layout"]',
-              action: 'scroll',
-            },
+            { matches: '[text="广告"] << [id="tv.danmaku.bili:id/root_layout"]', action: 'scroll' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.bilibili.app.blue',
+      name: '哔哩哔哩概念版',
+      groups: [
+        {
+          key: 3005,
+          name: 'B站概念版开屏广告',
+          category: 0,
+          activityIds: 'tv.danmaku.bili.ui.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.bilibili.app.blue:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -608,12 +836,8 @@
           category: 0,
           activityIds: 'com.ss.android.ugc.aweme.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.ss.android.ugc.aweme:id/skip_text"][clickable=true][visibleToUser=true]',
-            },
-            {
-              matches: '[id="com.ss.android.ugc.aweme:id/jump_count_down"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.ss.android.ugc.aweme:id/skip_text"][clickable=true][visibleToUser=true]' },
+            { matches: '[id="com.ss.android.ugc.aweme:id/jump_count_down"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -621,9 +845,22 @@
           name: '抖音弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.ss.android.ugc.aweme:id/close_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.ss.android.ugc.aweme:id/close_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.ss.android.ugc.aweme.lite',
+      name: '抖音极速版',
+      groups: [
+        {
+          key: 3015,
+          name: '抖音极速版开屏广告',
+          category: 0,
+          activityIds: 'com.ss.android.ugc.aweme.lite.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.ss.android.ugc.aweme.lite:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -638,9 +875,7 @@
           category: 0,
           activityIds: 'com.yxcorp.gifshow.HomeActivity',
           rules: [
-            {
-              matches: '[id="com.smile.gifmaker:id/skip_text"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.smile.gifmaker:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -648,9 +883,22 @@
           name: '快手弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.smile.gifmaker:id/close_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.smile.gifmaker:id/close_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.kuaishou.nebula',
+      name: '快手极速版',
+      groups: [
+        {
+          key: 3025,
+          name: '快手极速版开屏广告',
+          category: 0,
+          activityIds: 'com.kuaishou.nebula.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.kuaishou.nebula:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -665,9 +913,22 @@
           category: 0,
           activityIds: 'com.iqiyi.video.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.iqiyi.video:id/skip_ad"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.iqiyi.video:id/skip_ad"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.qiyi.video.lite',
+      name: '爱奇艺极速版',
+      groups: [
+        {
+          key: 3035,
+          name: '爱奇艺极速版开屏广告',
+          category: 0,
+          activityIds: 'com.qiyi.video.lite.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.qiyi.video.lite:id/skip_ad"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -682,9 +943,7 @@
           category: 0,
           activityIds: 'com.tencent.qqlive.module.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tencent.qqlive:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.qqlive:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -699,9 +958,7 @@
           category: 0,
           activityIds: 'com.youku.phone.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.youku.phone:id/skip_layout"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.youku.phone:id/skip_layout"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -716,9 +973,7 @@
           category: 0,
           activityIds: 'com.hunantv.imgo.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.hunantv.imgo.activity:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.hunantv.imgo.activity:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -733,9 +988,7 @@
           category: 0,
           activityIds: 'com.ss.android.article.video.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.ss.android.article.video:id/skip_text"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.ss.android.article.video:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -750,9 +1003,52 @@
           category: 0,
           activityIds: 'cmccwm.mobilemusic.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="cmccwm.mobilemusic:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="cmccwm.mobilemusic:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.cmcc.cmvideo',
+      name: '咪咕视频',
+      groups: [
+        {
+          key: 3090,
+          name: '咪咕视频开屏广告',
+          category: 0,
+          activityIds: 'com.cmcc.cmvideo.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.cmcc.cmvideo:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.tencent.karaoke',
+      name: '全民K歌',
+      groups: [
+        {
+          key: 3100,
+          name: '全民K歌开屏广告',
+          category: 0,
+          activityIds: 'com.tencent.karaoke.module.splash.ui.SplashActivity',
+          rules: [
+            { matches: '[id="com.tencent.karaoke:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'changba',
+      name: '唱吧',
+      groups: [
+        {
+          key: 3110,
+          name: '唱吧开屏广告',
+          category: 0,
+          activityIds: 'com.changba.activity.SplashActivity',
+          rules: [
+            { matches: '[id="changba:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -769,9 +1065,7 @@
           category: 0,
           activityIds: 'com.autonavi.minimap.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.autonavi.minimap:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.autonavi.minimap:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -786,9 +1080,7 @@
           category: 0,
           activityIds: 'com.baidu.baidumaps.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.baidu.BaiduMap:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.baidu.BaiduMap:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -803,9 +1095,7 @@
           category: 0,
           activityIds: 'com.sdu.didi.psnger.module.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.sdu.didi.psnger:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.sdu.didi.psnger:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -820,9 +1110,7 @@
           category: 0,
           activityIds: 'com.jingyao.easybike.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.jingyao.easybike:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.jingyao.easybike:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -837,9 +1125,7 @@
           category: 0,
           activityIds: 'com.sankuai.meituan.activity.WelcomeActivity',
           rules: [
-            {
-              matches: '[id="com.sankuai.meituan:id/skip"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.sankuai.meituan:id/skip"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -847,9 +1133,22 @@
           name: '美团首页弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.sankuai.meituan:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.sankuai.meituan:id/close"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.sankuai.meituan.takeoutnew',
+      name: '美团外卖',
+      groups: [
+        {
+          key: 4045,
+          name: '美团外卖开屏广告',
+          category: 0,
+          activityIds: 'com.sankuai.meituan.takeoutnew.ui.page.boot.WelcomeActivity',
+          rules: [
+            { matches: '[id="com.sankuai.meituan.takeoutnew:id/skip"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -864,9 +1163,7 @@
           category: 0,
           activityIds: 'me.ele.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="me.ele:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="me.ele:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -881,15 +1178,148 @@
           category: 0,
           activityIds: 'com.dianping.v1.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.dianping.v1:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.dianping.v1:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.taobao.trip',
+      name: '飞猪旅行',
+      groups: [
+        {
+          key: 4070,
+          name: '飞猪开屏广告',
+          category: 0,
+          activityIds: 'com.taobao.trip.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.taobao.trip:id/skip"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.tuniu.app.ui',
+      name: '途牛旅游',
+      groups: [
+        {
+          key: 4080,
+          name: '途牛开屏广告',
+          category: 0,
+          activityIds: 'com.tuniu.app.ui.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.tuniu.app.ui:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.mfw.roadbook',
+      name: '马蜂窝',
+      groups: [
+        {
+          key: 4090,
+          name: '马蜂窝开屏广告',
+          category: 0,
+          activityIds: 'com.mfw.roadbook.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.mfw.roadbook:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'ctrip.android.view',
+      name: '携程旅行',
+      groups: [
+        {
+          key: 4100,
+          name: '携程开屏广告',
+          category: 0,
+          activityIds: 'ctrip.android.view.splash.SplashActivity',
+          rules: [
+            { matches: '[id="ctrip.android.view:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.flightmanager.view',
+      name: '飞常准',
+      groups: [
+        {
+          key: 4110,
+          name: '飞常准开屏广告',
+          category: 0,
+          activityIds: 'com.flightmanager.view.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.flightmanager.view:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.moji.mjweather',
+      name: '墨迹天气',
+      groups: [
+        {
+          key: 4120,
+          name: '墨迹天气开屏广告',
+          category: 0,
+          activityIds: 'com.moji.mjweather.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.moji.mjweather:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.baidu.searchbox',
+      name: '百度',
+      groups: [
+        {
+          key: 4130,
+          name: '百度开屏广告',
+          category: 0,
+          activityIds: 'com.baidu.searchbox.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.baidu.searchbox:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.baidu.homework',
+      name: '作业帮',
+      groups: [
+        {
+          key: 4140,
+          name: '作业帮开屏广告',
+          category: 0,
+          activityIds: 'com.baidu.homework.activity.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.baidu.homework:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.ifenbei.study',
+      name: '小猿搜题',
+      groups: [
+        {
+          key: 4150,
+          name: '小猿搜题开屏广告',
+          category: 0,
+          activityIds: 'com.ifenbei.study.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.ifenbei.study:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
     },
 
-    // ====================== 银行支付类APP ======================
+    // ====================== 金融支付类APP ======================
     {
       id: 'com.eg.android.AlipayGphone',
       name: '支付宝',
@@ -900,9 +1330,7 @@
           category: 0,
           activityIds: 'com.eg.android.AlipayGphone.AlipayLogin',
           rules: [
-            {
-              matches: '[id="com.eg.android.AlipayGphone:id/skip_text"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.eg.android.AlipayGphone:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
@@ -910,9 +1338,22 @@
           name: '支付宝首页弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.eg.android.AlipayGphone:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.eg.android.AlipayGphone:id/close"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.eg.android.AlipayGphone.lite',
+      name: '支付宝极速版',
+      groups: [
+        {
+          key: 5005,
+          name: '支付宝极速版开屏广告',
+          category: 0,
+          activityIds: 'com.eg.android.AlipayGphone.lite.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.eg.android.AlipayGphone.lite:id/skip_text"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -927,9 +1368,7 @@
           category: 0,
           activityIds: 'com.unionpay.activity.UPActivitySplash',
           rules: [
-            {
-              matches: '[id="com.unionpay:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.unionpay:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -944,9 +1383,7 @@
           category: 0,
           activityIds: 'com.icbc.activity.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.icbc:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.icbc:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -961,9 +1398,7 @@
           category: 0,
           activityIds: 'com.chinamworld.main.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.chinamworld.main:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.chinamworld.main:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -978,9 +1413,7 @@
           category: 0,
           activityIds: 'cmb.pb.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="cmb.pb:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="cmb.pb:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -995,9 +1428,7 @@
           category: 0,
           activityIds: 'com.chinamworld.bocmbci.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.chinamworld.bocmbci:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.chinamworld.bocmbci:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1012,9 +1443,7 @@
           category: 0,
           activityIds: 'com.bankcomm.Bankcomm.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.bankcomm.Bankcomm:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.bankcomm.Bankcomm:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1029,89 +1458,137 @@
           category: 0,
           activityIds: 'com.yitong.mbank.psbc.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.yitong.mbank.psbc:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.yitong.mbank.psbc:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.pingan.paces.ccms',
+      name: '平安银行',
+      groups: [
+        {
+          key: 5080,
+          name: '平安银行开屏广告',
+          category: 0,
+          activityIds: 'com.pingan.paces.ccms.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.pingan.paces.ccms:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.cmbchina.ccd.pluto.cmbActivity',
+      name: '招商银行掌上生活',
+      groups: [
+        {
+          key: 5090,
+          name: '掌上生活开屏广告',
+          category: 0,
+          activityIds: 'com.cmbchina.ccd.pluto.cmbActivity.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.cmbchina.ccd.pluto.cmbActivity:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.spdb.mobilebank.per',
+      name: '浦发银行',
+      groups: [
+        {
+          key: 5100,
+          name: '浦发银行开屏广告',
+          category: 0,
+          activityIds: 'com.spdb.mobilebank.per.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.spdb.mobilebank.per:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.cebbank.mobile.cemb',
+      name: '光大银行',
+      groups: [
+        {
+          key: 5110,
+          name: '光大银行开屏广告',
+          category: 0,
+          activityIds: 'com.cebbank.mobile.cemb.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.cebbank.mobile.cemb:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.cib.cibmb',
+      name: '兴业银行',
+      groups: [
+        {
+          key: 5120,
+          name: '兴业银行开屏广告',
+          category: 0,
+          activityIds: 'com.cib.cibmb.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.cib.cibmb:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.huawei.hwid',
+      name: '华为钱包',
+      groups: [
+        {
+          key: 5130,
+          name: '华为钱包开屏广告',
+          category: 0,
+          activityIds: 'com.huawei.hwid.ui.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.huawei.hwid:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.miui.payment',
+      name: '小米钱包',
+      groups: [
+        {
+          key: 5140,
+          name: '小米钱包开屏广告',
+          category: 0,
+          activityIds: 'com.miui.payment.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.miui.payment:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
     },
 
-    // ====================== 办公类APP ======================
-    {
-      id: 'com.alibaba.android.rimet',
-      name: '钉钉',
-      groups: [
-        {
-          key: 6000,
-          name: '钉钉开屏广告',
-          category: 0,
-          activityIds: 'com.alibaba.android.rimet.ui.launcher.LauncherActivity',
-          rules: [
-            {
-              matches: '[id="com.alibaba.android.rimet:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'com.tencent.wework',
-      name: '企业微信',
-      groups: [
-        {
-          key: 6010,
-          name: '企业微信开屏广告',
-          category: 0,
-          activityIds: 'com.tencent.wework.launch.LaunchSplashActivity',
-          rules: [
-            {
-              matches: '[id="com.tencent.wework:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 'com.larksuite.suite',
-      name: '飞书',
-      groups: [
-        {
-          key: 6020,
-          name: '飞书开屏广告',
-          category: 0,
-          activityIds: 'com.larksuite.suite.ui.splash.SplashActivity',
-          rules: [
-            {
-              matches: '[id="com.larksuite.suite:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
-          ],
-        },
-      ],
-    },
+    // ====================== 办公工具类APP ======================
     {
       id: 'cn.wps.moffice_eng',
       name: 'WPS',
       groups: [
         {
-          key: 6030,
+          key: 6000,
           name: 'WPS开屏广告',
           category: 0,
           activityIds: 'cn.wps.moffice.documentmanager.PreStartActivity',
           rules: [
-            {
-              matches: '[id="cn.wps.moffice_eng:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="cn.wps.moffice_eng:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
-          key: 6031,
+          key: 6001,
           name: 'WPS弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="cn.wps.moffice_eng:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="cn.wps.moffice_eng:id/close"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1121,43 +1598,65 @@
       name: 'QQ邮箱',
       groups: [
         {
-          key: 6040,
+          key: 6010,
           name: 'QQ邮箱开屏广告',
           category: 0,
           activityIds: 'com.tencent.androidqqmail.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tencent.androidqqmail:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.androidqqmail:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
     },
-
-    // ====================== 工具类APP ======================
+    {
+      id: 'com.netease.mail',
+      name: '网易邮箱大师',
+      groups: [
+        {
+          key: 6020,
+          name: '网易邮箱大师开屏广告',
+          category: 0,
+          activityIds: 'com.netease.mail.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.netease.mail:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
     {
       id: 'com.baidu.netdisk',
       name: '百度网盘',
       groups: [
         {
-          key: 7000,
+          key: 6030,
           name: '百度网盘开屏广告',
           category: 0,
           activityIds: 'com.baidu.netdisk.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.baidu.netdisk:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.baidu.netdisk:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
         {
-          key: 7001,
+          key: 6031,
           name: '百度网盘弹窗广告',
           category: 1,
           rules: [
-            {
-              matches: '[id="com.baidu.netdisk:id/close"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.baidu.netdisk:id/close"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.huawei.hidisk',
+      name: '华为云空间',
+      groups: [
+        {
+          key: 6035,
+          name: '华为云空间开屏广告',
+          category: 0,
+          activityIds: 'com.huawei.hidisk.ui.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.huawei.hidisk:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1167,14 +1666,12 @@
       name: '迅雷',
       groups: [
         {
-          key: 7010,
+          key: 6040,
           name: '迅雷开屏广告',
           category: 0,
           activityIds: 'com.xunlei.downloadprovider.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.xunlei.downloadprovider:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.xunlei.downloadprovider:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1184,14 +1681,12 @@
       name: 'QQ浏览器',
       groups: [
         {
-          key: 7020,
+          key: 6050,
           name: 'QQ浏览器开屏广告',
           category: 0,
           activityIds: 'com.tencent.mtt.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tencent.mtt:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tencent.mtt:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1201,14 +1696,57 @@
       name: 'UC浏览器',
       groups: [
         {
-          key: 7030,
+          key: 6060,
           name: 'UC浏览器开屏广告',
           category: 0,
           activityIds: 'com.UCMobile.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.UCMobile:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.UCMobile:id/skip_view"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.baidu.browser.apps',
+      name: '百度浏览器',
+      groups: [
+        {
+          key: 6070,
+          name: '百度浏览器开屏广告',
+          category: 0,
+          activityIds: 'com.baidu.browser.apps.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.baidu.browser.apps:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.microsoft.emmx',
+      name: 'Edge浏览器',
+      groups: [
+        {
+          key: 6080,
+          name: 'Edge浏览器开屏广告',
+          category: 0,
+          activityIds: 'com.microsoft.emmx.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.microsoft.emmx:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.chrome.beta',
+      name: 'Chrome浏览器',
+      groups: [
+        {
+          key: 6090,
+          name: 'Chrome开屏广告',
+          category: 0,
+          activityIds: 'com.google.android.apps.chrome.Main',
+          rules: [
+            { matches: '[text*="Skip"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1218,14 +1756,12 @@
       name: '交管12123',
       groups: [
         {
-          key: 7040,
+          key: 6100,
           name: '交管12123开屏广告',
           category: 0,
           activityIds: 'com.tmri.app.main.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="com.tmri.app.main:id/skip_btn"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="com.tmri.app.main:id/skip_btn"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
@@ -1235,17 +1771,110 @@
       name: '国家医保服务平台',
       groups: [
         {
-          key: 7050,
+          key: 6110,
           name: '国家医保服务平台开屏广告',
           category: 0,
           activityIds: 'cn.hsa.app.ui.splash.SplashActivity',
           rules: [
-            {
-              matches: '[id="cn.hsa.app:id/skip_view"][clickable=true][visibleToUser=true]',
-            },
+            { matches: '[id="cn.hsa.app:id/skip_view"][clickable=true][visibleToUser=true]' },
           ],
         },
       ],
     },
-  ],
-}
+    {
+      id: 'com.tencent.qqmusic',
+      name: 'QQ音乐',
+      groups: [
+        {
+          key: 6120,
+          name: 'QQ音乐开屏广告',
+          category: 0,
+          activityIds: 'com.tencent.qqmusic.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.tencent.qqmusic:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.netease.cloudmusic',
+      name: '网易云音乐',
+      groups: [
+        {
+          key: 6130,
+          name: '网易云音乐开屏广告',
+          category: 0,
+          activityIds: 'com.netease.cloudmusic.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.netease.cloudmusic:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.kugou.android',
+      name: '酷狗音乐',
+      groups: [
+        {
+          key: 6140,
+          name: '酷狗音乐开屏广告',
+          category: 0,
+          activityIds: 'com.kugou.android.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.kugou.android:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.kuwo.player',
+      name: '酷我音乐',
+      groups: [
+        {
+          key: 6150,
+          name: '酷我音乐开屏广告',
+          category: 0,
+          activityIds: 'com.kuwo.player.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.kuwo.player:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.ximalaya.ting.android',
+      name: '喜马拉雅',
+      groups: [
+        {
+          key: 6160,
+          name: '喜马拉雅开屏广告',
+          category: 0,
+          activityIds: 'com.ximalaya.ting.android.activity.SplashActivity',
+          rules: [
+            { matches: '[id="com.ximalaya.ting.android:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.lizhi.fm',
+      name: '荔枝',
+      groups: [
+        {
+          key: 6170,
+          name: '荔枝开屏广告',
+          category: 0,
+          activityIds: 'com.lizhi.fm.splash.SplashActivity',
+          rules: [
+            { matches: '[id="com.lizhi.fm:id/skip_btn"][clickable=true][visibleToUser=true]' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'com.pingan.lifecircle',
+      name: '平安好车主',
+      groups: [
+        {
+          key: 6180,
+          name: '平安好车主开屏
