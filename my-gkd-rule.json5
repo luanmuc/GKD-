@@ -1,6 +1,6 @@
 {
-  id: "luanmuc_gkd_v20260403",
-  name: "luanmuc 自用广告规则（官方规范版）",
+  id: "luanmuc_gkd_official_final",
+  name: "luanmuc 自用广告规则（官方合规终极版）",
   version: 20260403,
   author: "luanmuc",
   priority: 100,
@@ -30,7 +30,7 @@
         },
         {
           matches: [
-            "text~=^跳过|\\d+s|跳过广告$",
+            "text~=^(跳过|\\d+s|跳过广告)$",
             "clickable=true",
             "visibleToUser=true"
           ],
@@ -101,7 +101,7 @@
     },
     {
       key: 1004,
-      name: "360 广告",
+      name: "360 广告联盟",
       category: 0,
       enable: true,
       actionMaximum: 1,
@@ -121,7 +121,7 @@
     },
     {
       key: 1005,
-      name: "阿里妈妈 / UC 广告",
+      name: "阿里妈妈/UC广告",
       category: 0,
       enable: true,
       actionMaximum: 1,
@@ -141,7 +141,7 @@
     },
     {
       key: 1006,
-      name: "小米广告",
+      name: "小米广告联盟",
       category: 0,
       enable: true,
       actionMaximum: 1,
