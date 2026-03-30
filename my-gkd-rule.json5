@@ -1,7 +1,7 @@
 {
   id: "global_ad_alliance_ultimate_final",
   name: "全球广告联盟通杀·最终稳定版",
-  version: 20260329,
+  version: 20260330,
   priority: 100,
   categories: [
     {
