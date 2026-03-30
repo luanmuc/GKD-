@@ -1,334 +1,374 @@
 {
-  "id": "global_ad_alliance_ultimate_final_20260403",
-  "name": "全球广告联盟全量拦截·完美修复版",
-  "version": 20260403,
-  "author": "GKD定制",
-  "priority": 200,
-  "categories": [
-    { "key": 0, "name": "开屏广告", "enable": true, "fastQuery": true },
-    { "key": 1, "name": "弹窗广告", "enable": true, "fastQuery": true },
-    { "key": 2, "name": "信息流广告", "enable": true, "fastQuery": true }
+  id: 2026040301,
+  name: "全球广告联盟全量拦截·低耗合规终极版",
+  version: 20260403,
+  author: "GKD官方规范定制",
+  priority: 200,
+  categories: [
+    { key: 0, name: "开屏广告", enable: true, fastQuery: true },
+    { key: 1, name: "弹窗广告", enable: true, fastQuery: true },
+    { key: 2, name: "信息流广告", enable: true, fastQuery: true }
   ],
-  "globalGroups": [
+  globalGroups: [
     {
-      "key": 1000,
-      "name": "【国内】穿山甲Pangle联盟",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 1000,
+      name: "【国内】穿山甲Pangle联盟",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "穿山甲SDK跳过按钮",
-          "matches": [
+          name: "穿山甲SDK跳过按钮",
+          matches: [
             "id~=^com\\.bytedance\\.ad\\..*(skip|close|jump_over)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/12745042"]
         },
         {
-          "name": "穿山甲文本跳过",
-          "matches": [
+          name: "穿山甲文本跳过",
+          matches: [
             "text~=^(跳过|\\d+秒|跳过广告)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/12745042"]
         }
       ]
     },
     {
-      "key": 1001,
-      "name": "【国内】腾讯优量汇GDT联盟",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 1001,
+      name: "【国内】腾讯优量汇GDT联盟",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "优量汇SDK跳过",
-          "matches": [
+          name: "优量汇SDK跳过按钮",
+          matches: [
             "id~=^com\\.qq\\.e\\.ad\\..*(skip|close)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/13544242"]
+        },
+        {
+          name: "优量汇开屏跳过",
+          matches: [
+            "id~=.*(splash_skip_button|tt_splash_skip_btn)",
+            "clickable=true",
+            "visibleToUser=true"
+          ],
+          action: "click",
+          actionDelay: 400,
+          snapshotUrls: ["https://i.gkd.li/import/13544242"]
         }
       ]
     },
     {
-      "key": 1002,
-      "name": "【国内】百度百青藤联盟",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 1002,
+      name: "【国内】百度百青藤联盟",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "百青藤SDK跳过",
-          "matches": [
+          name: "百青藤SDK跳过",
+          matches: [
             "id~=^com\\.baidu\\.mobads\\..*(skip|close)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/12727619"]
         }
       ]
     },
     {
-      "key": 1003,
-      "name": "【国内】快手广告联盟",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 1003,
+      name: "【国内】快手广告联盟",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "快手SDK跳过",
-          "matches": [
+          name: "快手SDK跳过",
+          matches: [
             "id~=^com\\.kwai\\.ad\\..*(skip|close)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/13626049"]
         }
       ]
     },
     {
-      "key": 1004,
-      "name": "【国内】阿里妈妈/汇川联盟",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 1004,
+      name: "【国内】阿里妈妈/汇川联盟",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "阿里SDK跳过",
-          "matches": [
+          name: "阿里SDK跳过",
+          matches: [
             "id~=^(com\\.uc\\.ad|com\\.taobao\\.adcore)\\..*skip$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/13215476"]
         }
       ]
     },
     {
-      "key": 1005,
-      "name": "【国内】小米米盟聚合广告",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 2000,
+      name: "【海外】Google AdMob/Ads",
+      category: 0,
+      enable: false,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "米盟SDK跳过",
-          "matches": [
-            "id~=^com\\.xiaomi\\.ad\\.mediation\\..*(skip|close)$",
-            "clickable=true",
-            "visibleToUser=true"
-          ],
-          "action": "click",
-          "actionDelay": 500
-        }
-      ]
-    },
-    {
-      "key": 1006,
-      "name": "【国内】火山引擎广告",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
-        {
-          "name": "火山引擎SDK跳过",
-          "matches": [
-            "id~=^com\\.volcengine\\.ads\\..*(skip|close)$",
-            "clickable=true",
-            "visibleToUser=true"
-          ],
-          "action": "click",
-          "actionDelay": 500
-        }
-      ]
-    },
-    {
-      "key": 2000,
-      "name": "【海外】Google AdMob/Ads",
-      "category": 0,
-      "enable": false,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
-        {
-          "name": "AdMob跳过按钮",
-          "matches": [
+          name: "AdMob跳过按钮",
+          matches: [
             "id~=^com\\.google\\.android\\.gms\\.ads\\..*(skip|close|dismiss)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/13885906"]
         },
         {
-          "name": "AdMob英文跳过",
-          "matches": [
-            "text~=(Skip|Close|Dismiss)",
+          name: "AdMob英文跳过",
+          matches: [
+            "text~=(Skip|Close|Dismiss ad|Skip Ad)",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/13885906"]
         }
       ]
     },
     {
-      "key": 2001,
-      "name": "【海外】Meta Audience Network",
-      "category": 0,
-      "enable": false,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+      key: 2001,
+      name: "【海外】Meta Audience Network",
+      category: 0,
+      enable: false,
+      fastQuery: true,
+      actionMaximum: 1,
+      matchTime: 2500,
+      actionCd: 3000,
+      resetMatch: "app",
+      rules: [
         {
-          "name": "Meta SDK跳过",
-          "matches": [
+          name: "Meta SDK跳过",
+          matches: [
             "id~=^com\\.facebook\\.ads\\..*(skip|close)$",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
-        }
-      ]
-    },
-    {
-      "key": 2002,
-      "name": "【海外】Adsterra(南亚/东南亚)",
-      "category": 0,
-      "enable": false,
-      "fastQuery": true,
-      "actionMaximum": 1,
-      "matchTime": 2500,
-      "actionCd": 3000,
-      "resetMatch": "app",
-      "rules": [
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/12715483"]
+        },
         {
-          "name": "Adsterra通用跳过",
-          "matches": [
-            "text~=(Skip|Close|No Thanks)",
+          name: "Meta英文跳过",
+          matches: [
+            "text~=(Skip|Close Ad|Dismiss)",
             "clickable=true",
             "visibleToUser=true"
           ],
-          "action": "click",
-          "actionDelay": 500
+          action: "click",
+          actionDelay: 500,
+          snapshotUrls: ["https://i.gkd.li/import/12715483"]
         }
       ]
     },
     {
-      "key": 9000,
-      "name": "全局兜底拦截",
-      "category": 0,
-      "enable": true,
-      "fastQuery": true,
-      "priority": -100,
-      "actionMaximum": 1,
-      "matchTime": 1500,
-      "actionCd": 3000,
-      "resetMatch": "activity",
-      "rules": [
-        { "matches": ["text=跳过", "clickable=true", "visibleToUser=true"], "action": "click", "actionDelay": 400 },
-        { "matches": ["text=Skip", "clickable=true", "visibleToUser=true"], "action": "click", "actionDelay": 400 },
-        { "matches": ["text=×", "clickable=true", "visibleToUser=true", "width<60"], "action": "click" }
+      key: 9000,
+      name: "全局兜底拦截",
+      category: 0,
+      enable: true,
+      fastQuery: true,
+      priority: -100,
+      actionMaximum: 2,
+      matchTime: 1500,
+      actionCd: 3000,
+      resetMatch: "activity",
+      rules: [
+        {
+          name: "中文跳过兜底",
+          matches: [
+            "text=跳过",
+            "clickable=true",
+            "visibleToUser=true"
+          ],
+          action: "click",
+          actionDelay: 400,
+          snapshotUrls: ["https://i.gkd.li/import/12639752"]
+        },
+        {
+          name: "英文Skip兜底",
+          matches: [
+            "text=Skip",
+            "clickable=true",
+            "visibleToUser=true"
+          ],
+          action: "click",
+          actionDelay: 400,
+          snapshotUrls: ["https://i.gkd.li/import/12639752"]
+        },
+        {
+          name: "关闭按钮×兜底",
+          matches: [
+            "text=×",
+            "clickable=true",
+            "visibleToUser=true",
+            "width<60",
+            "height<60"
+          ],
+          action: "click",
+          actionDelay: 300,
+          snapshotUrls: ["https://i.gkd.li/import/12639752"]
+        }
       ]
     },
     {
-      "key": 9001,
-      "name": "弹窗广告兜底",
-      "category": 1,
-      "enable": true,
-      "fastQuery": true,
-      "actionMaximum": 2,
-      "matchTime": 2000,
-      "actionCd": 3000,
-      "resetMatch": "activity",
-      "rules": [
+      key: 9001,
+      name: "弹窗广告兜底",
+      category: 1,
+      enable: true,
+      fastQuery: true,
+      actionMaximum: 2,
+      matchTime: 2000,
+      actionCd: 3000,
+      resetMatch: "activity",
+      rules: [
         {
-          "matches": [
+          name: "弹窗关闭按钮",
+          matches: [
             "id~=.*(close|dismiss|cancel)",
             "clickable=true",
-            "visibleToUser=true"
+            "visibleToUser=true",
+            "width<80",
+            "height<80"
           ],
-          "action": "click",
-          "actionDelay": 300
+          action: "click",
+          actionDelay: 300,
+          snapshotUrls: ["https://i.gkd.li/import/12639752"]
         }
       ]
     }
   ],
-  "apps": [
+  apps: [
     {
-      "id": "com.tencent.mm",
-      "name": "微信",
-      "groups": [
+      id: "com.tencent.mm",
+      name: "微信",
+      groups: [
         {
-          "key": 3000,
-          "name": "微信开屏广告",
-          "category": 0,
-          "enable": true,
-          "activityIds": ["com.tencent.mm.ui.LauncherUI"],
-          "rules": [
-            { "matches": ["id=com.tencent.mm:id/skip_ad_button", "clickable=true"], "action": "click", "actionDelay": 300 }
+          key: 3000,
+          name: "微信开屏广告",
+          category: 0,
+          enable: true,
+          activityIds: ["com.tencent.mm.ui.LauncherUI"],
+          actionMaximum: 1,
+          matchTime: 2500,
+          rules: [
+            {
+              matches: [
+                "id=com.tencent.mm:id/skip_ad_button",
+                "clickable=true",
+                "visibleToUser=true"
+              ],
+              action: "click",
+              actionDelay: 300
+            }
           ]
         }
       ]
     },
     {
-      "id": "com.ss.android.ugc.aweme",
-      "name": "抖音",
-      "groups": [
+      id: "com.ss.android.ugc.aweme",
+      name: "抖音",
+      groups: [
         {
-          "key": 3001,
-          "name": "抖音开屏广告",
-          "category": 0,
-          "enable": true,
-          "activityIds": ["com.ss.android.ugc.aweme.splash.SplashActivity"],
-          "rules": [
-            { "matches": ["id~=(skip_text|count_down)", "clickable=true"], "action": "click", "actionDelay": 300 }
+          key: 3001,
+          name: "抖音开屏广告",
+          category: 0,
+          enable: true,
+          activityIds: ["com.ss.android.ugc.aweme.splash.SplashActivity"],
+          rules: [
+            {
+              matches: [
+                "id~=(skip_text|count_down|ttskip)",
+                "clickable=true",
+                "visibleToUser=true"
+              ],
+              action: "click",
+              actionDelay: 300
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: "com.taobao.taobao",
+      name: "淘宝",
+      groups: [
+        {
+          key: 3002,
+          name: "淘宝开屏广告",
+          category: 0,
+          enable: true,
+          activityIds: ["com.taobao.tao.welcome.Welcome"],
+          rules: [
+            {
+              matches: [
+                "id=com.taobao.taobao:id/skip",
+                "clickable=true",
+                "visibleToUser=true"
+              ],
+              action: "click",
+              actionDelay: 300
+            }
           ]
         }
       ]
