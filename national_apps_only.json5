@@ -1,0 +1,136 @@
+{
+  id: "luanmuc_gkd_series_v20260404",
+  name: "国民APP广告拦截·按派系分类·低耗极速版",
+  version: 20260404,
+  author: "luanmuc",
+  priority: 100,
+  categories: [
+    { key: 0, name: "开屏广告", enable: true },
+    { key: 1, name: "弹窗广告", enable: true }
+  ],
+  // 全局规则极致精简：降低耗电+提升匹配速度
+  globalGroups: [
+    {
+      key: 9000,
+      name: "全局开屏极速兜底",
+      category: 0,
+      enable: true,
+      priority: -100,
+      actionMaximum: 1,
+      matchTime: 1200,
+      resetMatch: "app",
+      rules: [
+        { matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }
+      ]
+    },
+    {
+      key: 9001,
+      name: "全局弹窗极速兜底",
+      category: 1,
+      enable: true,
+      priority: -100,
+      actionMaximum: 1,
+      matchTime: 1800,
+      resetMatch: "activity",
+      rules: [
+        { matches: ["text=×", "clickable=true", "visibleToUser=true"], action: "click" }
+      ]
+    }
+  ],
+  // 按派系分类·所有APP规则极简统一·无冗余·超低耗电
+  apps: [
+    // ========== 腾讯系 ==========
+    { id: "com.tencent.mm", name: "微信", groups: [{ key: 1001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tencent.qq", name: "QQ", groups: [{ key: 1002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tencent.news", name: "腾讯新闻", groups: [{ key: 1003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tencent.docs", name: "腾讯文档", groups: [{ key: 1004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tencent.weread", name: "微信读书", groups: [{ key: 1005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.qq.ac.android", name: "腾讯动漫", groups: [{ key: 1006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 抖音/字节系 ==========
+    { id: "com.ss.android.ugc.aweme", name: "抖音", groups: [{ key: 2001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.xiaohongshu", name: "小红书", groups: [{ key: 2002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.bytedance.feishu", name: "飞书", groups: [{ key: 2003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.bytedance.hydrama", name: "红果短剧", groups: [{ key: 2004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 百度系 ==========
+    { id: "com.baidu.netdisk", name: "百度网盘", groups: [{ key: 3001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.baidu.tieba", name: "百度贴吧", groups: [{ key: 3002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.baidu.input", name: "百度输入法", groups: [{ key: 3003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.baidu.BaiduMap", name: "百度地图", groups: [{ key: 3004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.baidu.tangshu", name: "番茄免费小说", groups: [{ key: 3005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.baidu.short", name: "番茄短剧", groups: [{ key: 3006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 阿里系 ==========
+    { id: "com.taobao.taobao", name: "淘宝", groups: [{ key: 4001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tmall.wireless", name: "天猫", groups: [{ key: 4002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.alibaba.android.rimet", name: "钉钉", groups: [{ key: 4003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.taobao.idlefish", name: "闲鱼", groups: [{ key: 4004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.alibaba.android", name: "1688阿里巴巴", groups: [{ key: 4005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.maidao.app", name: "盒马鲜生", groups: [{ key: 4006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tao.caicai", name: "淘菜菜", groups: [{ key: 4007, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 快手系 ==========
+    { id: "com.smile.gifmaker", name: "快手", groups: [{ key: 5001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.kuaishou.scope", name: "快手极速版", groups: [{ key: 5002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 视频影音系 ==========
+    { id: "com.qiyi.video", name: "爱奇艺", groups: [{ key: 6001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.youku.phone", name: "优酷视频", groups: [{ key: 6002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "tv.danmaku.bili", name: "哔哩哔哩", groups: [{ key: 6003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.cmcc.cmvideo", name: "咪咕视频", groups: [{ key: 6004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "cn.cctv.news", name: "央视影音", groups: [{ key: 6005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.duowan.kiwi", name: "虎牙直播", groups: [{ key: 6006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.douyu.tv", name: "斗鱼直播", groups: [{ key: 6007, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 音乐播客系 ==========
+    { id: "com.kugou.android", name: "酷狗音乐", groups: [{ key: 7001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "cn.kuwo.player", name: "酷我音乐", groups: [{ key: 7002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.ximalaya.ting.android", name: "喜马拉雅", groups: [{ key: 7003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.netease.qishui", name: "汽水音乐", groups: [{ key: 7004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.migu.music", name: "咪咕音乐", groups: [{ key: 7005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 新闻浏览器系 ==========
+    { id: "com.sina.news", name: "新浪新闻", groups: [{ key: 8001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.ifeng.news", name: "凤凰新闻", groups: [{ key: 8002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.yidian.news", name: "一点资讯", groups: [{ key: 8003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.ucbrowser", name: "UC浏览器", groups: [{ key: 8004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.quark.browser", name: "夸克浏览器", groups: [{ key: 8005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 办公工具系 ==========
+    { id: "cn.wps.moffice_eng", name: "WPS Office", groups: [{ key: 9001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.intsig.camscanner", name: "扫描全能王", groups: [{ key: 9002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.xunlei.downloadprovider", name: "迅雷", groups: [{ key: 9003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.aliyun.alidisk", name: "阿里云盘", groups: [{ key: 9004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.moji.mjweather", name: "墨迹天气", groups: [{ key: 9005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.iflytek.inputmethod", name: "讯飞输入法", groups: [{ key: 9006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 出行金融系 ==========
+    { id: "com.amap.api", name: "高德地图", groups: [{ key: 10001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.hellobike", name: "哈啰", groups: [{ key: 10002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.zhixing.train", name: "智行火车票", groups: [{ key: 10003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.unionpay", name: "云闪付", groups: [{ key: 10004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "cmb.pb", name: "招商银行", groups: [{ key: 10005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.ccb", name: "建设银行", groups: [{ key: 10006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 汽车健康家居系 ==========
+    { id: "com.dongchediagram", name: "懂车帝", groups: [{ key: 11001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.chezhu", name: "汽车之家", groups: [{ key: 11002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.tmri.app.main", name: "交管12123", groups: [{ key: 11003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.huawei.health", name: "华为运动健康", groups: [{ key: 11004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.hupu.gym", name: "Keep", groups: [{ key: 11005, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.xiaomi.smarthome", name: "米家", groups: [{ key: 11006, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.huawei.smarthome", name: "华为智慧生活", groups: [{ key: 11007, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 阅读小说系 ==========
+    { id: "com.kmxs.reader", name: "七猫免费小说", groups: [{ key: 12001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.qidian.QDReader", name: "起点读书", groups: [{ key: 12002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+
+    // ========== 社交社区系 ==========
+    { id: "com.sina.weibo", name: "微博", groups: [{ key: 13001, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.sina.weibolite", name: "微博极速版", groups: [{ key: 13002, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.zhihu.android", name: "知乎", groups: [{ key: 13003, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "com.douban", name: "豆瓣", groups: [{ key: 13004, category: 0, enable: true, rules: [{ matches: ["text=跳过", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]},
+    { id: "org.telegram.messenger.web", name: "Telegram中文版", groups: [{ key: 13005, category: 0, enable: true, rules: [{ matches: ["text=Skip", "clickable=true", "visibleToUser=true"], action: "click", actionDelay: 300 }]}]}
+  ]
+}
