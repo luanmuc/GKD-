@@ -1,8 +1,4 @@
 # GKD 全球广告联盟通杀规则包
-## 🏆 版本信息
-- **版本号**：global_ad_alliance_ultimate_final
-- **更新时间**：2026.03.29
-- **适用版本**：GKD v1.8.0+
 
 ## 🎯 核心特性
 1. **全球全覆盖**：国内+海外主流/长尾广告联盟100%收录
@@ -12,7 +8,7 @@
 
 ## 📥 订阅使用
 **远程订阅地址**（替换为你的 Raw 链接）：
-`https://raw.githubusercontent.com/luanmuc/GKD-/main/my-gkd-rule.json5`
+https://gh-proxy.org/https://raw.githubusercontent.com/luanmuc/GKD-/main/my-gkd-rule.json5
 
 ## 📌 维护说明
 - 无需手动添加新APP，自动适配联盟广告
